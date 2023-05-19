@@ -1,10 +1,60 @@
 # Cron Cheat Sheet
 
+This repository contains a concise cheat sheet that serves as a reference for working with cron jobs in Unix-like operating systems. Whether you're new to cron or an experienced user, you'll find this guide useful for quickly looking up cron syntax, understanding special characters, scheduling commands to run at desired times, and more.
+
 Cron is a job scheduler in Unix-like operating systems. Users can schedule jobs (commands or scripts) to run at specific times on specific days.
 
 A cron job is an entry in a cron table (crontab), which is a list of all the jobs that cron will check and run if necessary.
 
-## Basic Format of a Cron Job
+## Basic Format
+
+- [Basic Format](#basic-format)
+
+## Special Characters
+
+- [Special Characters](#special-characters)
+
+## Special Strings
+
+- [Special Strings](#special-strings)
+
+## Special String Examples
+
+- [A script that is run once at system boot](#a-script-that-is-run-once-at-system-boot)
+- [A script that runs once an hour](#a-script-that-runs-once-an-hour)
+- [A script that runs once a day](#a-script-that-runs-once-a-day)
+- [A script that runs once a week](#a-script-that-runs-once-a-week)
+- [A script that runs once a month](#a-script-that-runs-once-a-month)
+- [A script that runs once a year](#a-script-that-runs-once-a-year)
+
+## Cron Jobs Examples
+
+- [A script that runs every minute](#a-script-that-runs-every-minute)
+- [A script that runs every five minutes](#a-script-that-runs-every-five-minutes)
+- [A script that runs at the top of every hour](#a-script-that-runs-at-the-top-of-every-hour)
+- [A script that runs every 5 hours](#a-script-that-runs-every-5-hours)
+- [A script that runs at midnight every day](#a-script-that-runs-at-midnight-every-day)
+- [A job that runs at 2am every day](#a-job-that-runs-at-2am-every-day)
+- [A job that runs every 15 minutes](#a-job-that-runs-every-15-minutes)
+- [A script that runs at 5pm on weekdays](#a-script-that-runs-at-5pm-on-weekdays)
+- [A job that runs at 7 30pm on weekdays](#a-job-that-runs-at-7-30pm-on-weekdays)
+- [A script that runs at 9 30am on every Sunday](#a-script-that-runs-at-9-30am-on-every-sunday)
+- [A script that runs at 8am on the first day of every month](#a-script-that-runs-at-8am-on-the-first-day-of-every-month)
+- [A job that runs at 6 15pm on the last day of every month](#a-job-that-runs-at-6-15pm-on-the-last-day-of-every-month)
+- [Backup the website every day at 2 30am](#backup-the-website-every-day-at-2-30am)
+
+## Crontab Entries
+
+- [Edit Entries](#edit-entries)
+- [List Entries](#list-entries)
+- [Remove All Cron Jobs](#remove-all-cron-jobs)
+
+## Best Practices
+
+- [Best Practices](#best-practices)
+
+
+## Basic Format
 
 **A cron job line consists of 6 components:**
 
@@ -76,7 +126,7 @@ A cron job is an entry in a cron table (crontab), which is a list of all the job
 @yearly /path/to/command
 ```
 
-## Example Cron Jobs
+## Cron Jobs Examples
 
 ### A script that runs every minute
 
@@ -120,37 +170,37 @@ A cron job is an entry in a cron table (crontab), which is a list of all the job
 */15 * * * * /path/to/command
 ```
 
-### A script that runs at 5 PM on weekdays (Monday through Friday)
+### A script that runs at 5pm on weekdays
 
 ```
 0 17 * * 1-5 /path/to/command
 ```
 
-### A job that runs at 7:30pm on weekdays (Monday through Friday)
+### A job that runs at 7 30pm on weekdays
 
 ```
 30 19 * * 1-5 /path/to/command
 ```
 
-### A script that runs at 9:30 AM on every Sunday
+### A script that runs at 9 30am on every Sunday
 
 ```
 30 9 * * 0 /path/to/command
 ```
 
-### A script that runs at 8:00 AM on the first day of every month
+### A script that runs at 8am on the first day of every month
 
 ```
 0 8 1 * * /path/to/command
 ```
 
-### A job that runs at 6:15pm on the last day of every month
+### A job that runs at 6 15pm on the last day of every month
 
 ```
 15 18 * * * [ "$(date +\%m -d tomorrow)" != "$(date +\%m)" ] && /path/to/command
 ```
 
-### Backup the website every day at 2:30am
+### Backup the website every day at 2 30am
 
 ```
 30 2 * * * /path/to/backup_command
@@ -184,7 +234,7 @@ crontab -r
 
 **Note:** Remember, this will remove all your cron jobs.
 
-## Best Practices and Tips
+## Best Practices
 
 1. **_Test Your Commands:_** Before adding a job to your crontab, always test the command or script in your terminal. This will help you catch and resolve any errors that may prevent the job from running as expected.
 2. **_Manage Output:_** Cron jobs can generate a lot of output, especially if they're run often. By default, this output is mailed to the user the job runs under. To prevent this, you can redirect the output to a log file, a different mail address, or discard it completely. For example, to discard both standard output and errors, append >/dev/null 2>&1 to your command.
