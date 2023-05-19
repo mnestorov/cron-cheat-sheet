@@ -9,14 +9,14 @@ A cron job is an entry in a cron table (crontab), which is a list of all the job
 **A cron job line consists of 6 components:**
 
 ```
-*   *   *   *   *        command_to_be_executed
+*   *   *   *   *      command_to_be_executed
 -   -   -   -   -
 |   |   |   |   |
 |   |   |   |   +----- day of the week (0 - 6) (Sunday=0)
-|   |   |   +------- month (1 - 12)
-|   |   +--------- day of the month (1 - 31)
-|   +----------- hour (0 - 23)
-+------------- min (0 - 59)
+|   |   |   +--------- month (1 - 12)
+|   |   +------------- day of the month (1 - 31)
+|   +----------------- hour (0 - 23)
++--------------------- min (0 - 59)
 ```
 
 ## Special Characters
@@ -198,6 +198,8 @@ crontab -r
 10. **_Specific Timing:_** When scheduling, be aware that using both day of month and day of week fields together can lead to confusing behavior, because this will be interpreted as an OR operation, not an AND operation.
 11. **_Testing Cron Timing:_** For testing the time of running cron jobs, instead of waiting you can adjust your system time.
 12. **_Leverage More Advanced Scheduling Systems:_** If your requirements are becoming too complex for Cron, consider using a more advanced job scheduling system. Options include system-level replacements like anacron and systemd timers, and application-level job queues like those provided by Celery or Sidekiq.
+
+**Remember:** Cron is a powerful tool, but it requires careful use and monitoring. Always thoroughly test new cron jobs, and keep an eye on them once they're live.
 
 ---
 
